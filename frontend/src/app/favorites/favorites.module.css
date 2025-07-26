@@ -1,0 +1,254 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.browseButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.browseButton:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  color: #007bff;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #f5c6cb;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6c757d;
+}
+
+.emptyState h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.emptyState p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.emptyIcon {
+  width: 48px;
+  height: 48px;
+  color: #6c757d;
+  margin-bottom: 16px;
+}
+
+.favoritesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.favoriteCard {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.favoriteCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.cardHeader {
+  padding: 20px 20px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.cardHeader h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+
+.status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status.available {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status.unavailable {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.cardContent {
+  padding: 0 20px 20px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardContent p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.cardContent p strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 12px;
+  flex: 1;
+}
+
+.cardActions {
+  padding: 0 20px 20px 20px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.viewButton, .removeButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 80px;
+  justify-content: center;
+}
+
+.viewButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.viewButton:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.removeButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.removeButton:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .favoritesGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .cardActions {
+    flex-direction: column;
+  }
+  
+  .viewButton, .removeButton {
+    width: 100%;
+  }
+} 
+ 

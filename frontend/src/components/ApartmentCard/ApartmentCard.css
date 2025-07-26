@@ -1,0 +1,344 @@
+.apartment-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.apartment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.apartment-card:hover .card-img {
+  transform: scale(1.05);
+}
+
+.card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #28a745;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.favorite-button:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.favorite-button.favorited {
+  background-color: rgba(220, 53, 69, 0.9);
+}
+
+.favorite-button.favorited:hover {
+  background-color: rgba(220, 53, 69, 1);
+}
+
+.favorite-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.favorite-icon {
+  width: 18px;
+  height: 18px;
+  color: #6c757d;
+  transition: color 0.3s ease;
+}
+
+.favorite-button.favorited .favorite-icon {
+  color: white;
+}
+
+.card-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 0;
+}
+
+.card-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.location-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.card-details {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  border: none;
+  box-shadow: none;
+  background: none;
+  color: #666;
+}
+
+.detail-icon {
+  width: 16px;
+  height: 16px;
+  color: #6c757d;
+}
+
+.card-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.amenity-tag {
+  background-color: #f8f9fa;
+  color: #495057;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.amenity-tag.more {
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+
+.card-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: auto;
+  gap: 8px;
+}
+.card-price-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+.card-actions-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.card-price {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.price-icon {
+  width: 16px;
+  height: 16px;
+  color: #28a745;
+}
+
+.price-amount {
+  font-size: 20px;
+  font-weight: 700;
+  color: #28a745;
+}
+
+.price-period {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.card-price-view-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 768px) {
+  .card-content {
+    padding: 16px;
+  }
+  
+  .card-title {
+    font-size: 18px;
+  }
+  
+  .card-details {
+    gap: 12px;
+  }
+  
+  .card-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .card-price {
+    justify-content: center;
+  }
+} 
+
+.btn:focus,
+.btn:focus-visible,
+.favorite-button:focus,
+.favorite-button:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.btn:focus-visible,
+.favorite-button:focus-visible {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+} 
+
+.apartment-card .detail-icon,
+.apartment-card .location-icon,
+.apartment-card .favorite-icon,
+.apartment-card .price-icon {
+  color: #6c757d !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+.apartment-card .favorite-button.favorited .favorite-icon {
+  color: #dc3545 !important;
+  fill: #dc3545 !important;
+}
+.apartment-card .price-icon {
+  color: #28a745 !important;
+}
+.apartment-card svg {
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+} 
+
+.apartment-card .favorite-button,
+.apartment-card button:not(.btn):not(.btn-primary) {
+  background: none !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.apartment-card .btn,
+.apartment-card .btn-primary,
+.apartment-card a.btn,
+.apartment-card a.btn-primary {
+  /* Do NOT remove background! Only remove outline/border/box-shadow for focus/active */
+}
+
+.apartment-card .btn:focus,
+.apartment-card .btn:active,
+.apartment-card .btn-primary:focus,
+.apartment-card .btn-primary:active,
+.apartment-card a.btn:focus,
+.apartment-card a.btn:active,
+.apartment-card a.btn-primary:focus,
+.apartment-card a.btn-primary:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+} 
+
+.apartment-card .btn-primary {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: #007bff !important;
+  color: #fff !important;
+  padding: 16px 32px !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  min-width: 160px;
+  min-height: 56px;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.apartment-card .btn-primary:focus,
+.apartment-card .btn-primary:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: #0056b3 !important;
+  color: #fff !important;
+} 

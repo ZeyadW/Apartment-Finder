@@ -1,0 +1,414 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backButton:hover {
+  background: #e5e7eb;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.addButton:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.addButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.formContainer {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.formContainer h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroup label {
+  font-weight: 500;
+  color: #374151;
+  font-size: 14px;
+}
+
+.input, .textarea {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input.error, .textarea.error {
+  border-color: #ef4444;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.errorText {
+  color: #ef4444;
+  font-size: 12px;
+  margin: 0;
+}
+
+.formActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #10b981;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #059669;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  padding: 12px 24px;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover {
+  background: #e5e7eb;
+}
+
+.developersList h2 {
+  margin: 0 0 20px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px;
+  background: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  color: #6b7280;
+}
+
+.developersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.developerCard {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.developerCard:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.developerInfo {
+  margin-bottom: 16px;
+}
+
+.developerName {
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.developerDescription {
+  margin: 0 0 8px 0;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.developerWebsite {
+  display: block;
+  margin: 0 0 8px 0;
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.developerWebsite:hover {
+  text-decoration: underline;
+}
+
+.developerDate {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.developerActions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.editButton, .deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.editButton {
+  background: #fbbf24;
+  color: white;
+}
+
+.editButton:hover {
+  background: #f59e0b;
+}
+
+.deleteButton {
+  background: #ef4444;
+  color: white;
+}
+
+.deleteButton:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.deleteButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loadingContainer, .errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.retryButton {
+  margin-top: 16px;
+  padding: 12px 24px;
+  background: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.retryButton:hover {
+  background: #2563eb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .developersGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .developerCard {
+    padding: 16px;
+  }
+  
+  .developerActions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .editButton, .deleteButton {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .formContainer {
+    padding: 20px;
+  }
+  
+  .formContainer h2 {
+    font-size: 1.25rem;
+  }
+  
+  .formActions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .submitButton, .cancelButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+  
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .developerCard {
+    padding: 12px;
+  }
+  
+  .developerName {
+    font-size: 1.1rem;
+  }
+  
+  .developerDescription {
+    font-size: 0.9rem;
+  }
+  
+  .formContainer {
+    padding: 16px;
+  }
+  
+  .input, .textarea {
+    padding: 10px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .submitButton, .cancelButton {
+    padding: 12px 16px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+} 
