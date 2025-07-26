@@ -1,90 +1,172 @@
-# Apartment Listing App
+# Apartment Finder
 
-A full-stack apartment listing application built with Next.js, Express.js, and MongoDB Atlas.
+A modern apartment listing platform built for real estate agents, property managers, and home seekers. This full-stack application provides a complete solution for managing and discovering apartment listings with advanced search capabilities, role-based access control, and a responsive design that works seamlessly across all devices.
 
-## Quick Start
+## What This App Does
 
+**For Home Seekers:**
+- Browse available apartments with detailed information
+- Search and filter by location, price, bedrooms, and more
+- Save favorite listings for easy access
+- View high-quality images and property details
+- Get real-time availability updates
+
+**For Real Estate Agents:**
+- Create and manage apartment listings
+- Upload multiple images per property
+- Set availability status (show/hide from public view)
+- Track your listings and performance
+- Manage property details and amenities
+
+**For Administrators:**
+- Oversee all listings and user accounts
+- Manage developers, compounds, and amenities
+- Control user roles and permissions
+- Monitor system activity and performance
+- Ensure data quality and consistency
+
+## Tech Stack & Architecture
+
+**Frontend:**
+- Next.js 14 with App Router
+- TypeScript for type safety
+- CSS Modules for component styling
+- React Query for data fetching and caching
+- Responsive design with mobile-first approach
+
+**Backend:**
+- Express.js with TypeScript
+- Mongoose ODM for MongoDB
+- JWT authentication with role-based access
+- Class-validator for request validation
+- Helmet for security headers
+
+**Database:**
+- MongoDB Atlas for cloud hosting
+- Normalized schema with proper relationships
+- Indexed queries for performance
+- Data validation at the schema level
+
+**Infrastructure:**
+- Docker containers for easy deployment
+- Nginx reverse proxy with rate limiting
+- Environment-based configuration
+- Health check endpoints
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18+ and npm
+- Docker and Docker Compose (optional)
+- MongoDB Atlas account
+
+### Quick Setup
+
+**Option 1: Docker (Recommended - Easiest)**
 ```bash
-# Clone the repository
-git clone https://github.com/ZeyadW/apartment-listing-app.git
+git clone https://github.com/ZeyadW/Apartment-Finder
 cd apartment-listing-app
-
-# Start the application
 ./scripts/start.sh
 ```
 
-The app will be available at:
-- Frontend: http://localhost:3000
-- Backend: http://localhost:3001
+**Option 2: Manual Setup**
+1. **Clone and install:**
+```bash
+git clone https://github.com/ZeyadW/Apartment-Finder
+cd apartment-listing-app
+npm install
+cd frontend && npm install
+cd ../backend && npm install
+```
 
-## Features
+2. **Environment configuration:**
+Create a `.env` file in the root directory:
+```bash
+# Backend Configuration
+PORT=3001
+MONGODB_URI=mongodb+srv://zeyad:zeyadwael@nawy.xrmjrzc.mongodb.net/?retryWrites=true&w=majority&appName=Nawy
+JWT_SECRET=your_super_secret_jwt_key_change_in_production
+NODE_ENV=development
 
-- **User Management**: Admin, Agent, and User roles
-- **Apartment Listings**: Create, edit, and manage apartment listings
-- **Search & Filter**: Advanced search with multiple filters
-- **Image Upload**: Multi-image upload with compression
-- **Responsive Design**: Works on desktop and mobile
-- **Real-time Updates**: Live availability toggles
 
-## Tech Stack
+# Frontend Configuration
+NEXT_PUBLIC_API_URL=http://localhost:3001
+```
 
-- **Frontend**: Next.js 14, TypeScript, CSS Modules
-- **Backend**: Express.js, TypeScript, Mongoose
-- **Database**: MongoDB Atlas
-- **Containerization**: Docker & Docker Compose
+3. **Start the application:**
+```bash
+# Development mode
+npm run dev          # Frontend (port 3000)
+cd backend && npm run dev  # Backend (port 3001)
+
+# Or use Docker
+docker-compose up -d
+```
+
+The application will be available at:
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:3001
+- **Health Check**: http://localhost:3001/health
 
 ## Project Structure
 
 ```
-├── frontend/          # Next.js application
-├── backend/           # Express.js API
-├── scripts/           # Startup and utility scripts
-├── nginx/             # Reverse proxy configuration
-└── docker-compose.yml # Container orchestration
+apartment-listing-app/
+├── frontend/                 # Next.js application
+│   ├── src/
+│   │   ├── app/             # App Router pages
+│   │   ├── components/      # Reusable UI components
+│   │   ├── contexts/        # React contexts
+│   │   ├── hooks/           # Custom React hooks
+│   │   ├── services/        # API service layer
+│   │   └── types/           # TypeScript definitions
+│   └── public/              # Static assets
+├── backend/                  # Express.js API
+│   ├── src/
+│   │   ├── config/          # Database and app config
+│   │   ├── controllers/     # Request handlers
+│   │   ├── dtos/            # Data transfer objects
+│   │   ├── middleware/      # Express middleware
+│   │   ├── models/          # Mongoose schemas
+│   │   ├── repositories/    # Data access layer
+│   │   ├── routes/          # API route definitions
+│   │   ├── services/        # Business logic
+│   │   └── types/           # TypeScript definitions
+│   └── seeders/             # Database seed data
+├── nginx/                    # Reverse proxy config
+├── scripts/                  # Utility scripts
+└── docker-compose.yml        # Container orchestration
 ```
 
-## Environment Variables
+## Development Workflow
 
-Create a `.env` file in the root directory:
-
+### Backend Development
 ```bash
-PORT=3001
-MONGODB_URI=mongodb+srv://zeyad:zeyadwael@nawy.xrmjrzc.mongodb.net/?retryWrites=true&w=majority&appName=Nawy
-# Additional required variables for Docker Compose
-NODE_ENV=production
-JWT_SECRET=your-super-secret-jwt-key-change-in-production
-NEXT_PUBLIC_API_URL=http://localhost:3001
-
+cd backend
+npm run dev          # Start with nodemon
+npm run build        # Build for production
+npm run seed         # Seed database with sample data
 ```
 
-## Development
-
+### Frontend Development
 ```bash
-# Install dependencies
-npm install
-
-# Start development servers
-npm run dev          # Frontend
-cd backend && npm run dev  # Backend
+cd frontend
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run lint         # Run ESLint
 ```
 
-## Docker Commands
+### Database Management
+The application uses MongoDB with Mongoose for data modeling. Key collections include:
+- **Users**: Authentication and role management
+- **Apartments**: Property listings with full details
+- **Developers**: Property development companies
+- **Compounds**: Residential compounds/communities
+- **Amenities**: Available property amenities
 
-```bash
-# Start all services
-docker-compose up -d
+## API Documentation
 
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
-
-# Rebuild images
-docker-compose up --build
-```
-
-## API Endpoints
+The backend provides a RESTful API with comprehensive endpoints for all functionality. All responses follow a consistent format and include proper error handling.
 
 ### Base URL
 ```
@@ -92,13 +174,12 @@ http://localhost:3001/api
 ```
 
 ### Authentication
-Most endpoints require authentication. Include the JWT token in the Authorization header:
+Most endpoints require JWT authentication. Include the token in your requests:
 ```
 Authorization: Bearer <your_jwt_token>
 ```
 
 ### Response Format
-All API responses follow this format:
 ```json
 {
   "success": true,
@@ -108,566 +189,211 @@ All API responses follow this format:
 }
 ```
 
+### Key Endpoints
+
+**Authentication:**
+- `POST /api/auth/register` - Create new account
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user profile
+
+**Apartments:**
+- `GET /api/apartments` - List all apartments (with filters)
+- `POST /api/apartments` - Create new listing (agents/admins)
+- `GET /api/apartments/:id` - Get specific apartment
+- `PUT /api/apartments/:id` - Update listing
+- `DELETE /api/apartments/:id` - Delete listing
+
+**Management:**
+- `GET /api/developers` - List developers
+- `GET /api/compounds` - List compounds
+- `GET /api/amenities` - List amenities
+
+**User Features:**
+- `GET /api/apartments/favorites` - User's favorite listings
+- `POST /api/apartments/:id/favorite` - Add to favorites
+- `GET /api/apartments/my-listings` - Agent's listings
+
+### Search & Filtering
+The apartment search supports multiple filters:
+- **Text search**: Unit name, project, address
+- **Location**: City, state, compound
+- **Price range**: Min/max price filtering
+- **Property details**: Bedrooms, bathrooms, square footage
+- **Listing type**: Rent or sale
+- **Availability**: Show/hide unavailable listings
+
 ### Pagination
-For endpoints that return lists, pagination is supported:
-- **Query Parameters**: `page` (default: 1), `limit` (default: 10)
-- **Response**: Includes `count` field with total number of items
-
-### Validation
-The API uses class-validator for request validation. Invalid requests return:
-```json
-{
-  "success": false,
-  "message": "Validation failed",
-  "errors": [
-    {
-      "property": "fieldName",
-      "constraints": {
-        "isNotEmpty": "Field cannot be empty"
-      }
-    }
-  ]
-}
-```
-
----
+List endpoints support pagination with `page` and `limit` parameters. Responses include a `count` field with the total number of items.
 
 ## Data Models
 
-### User Model
+### User
 ```json
 {
   "_id": "ObjectId",
-  "firstName": "string (2-50 chars, required)",
-  "lastName": "string (2-50 chars, required)",
-  "email": "string (valid email, unique, required)",
-  "password": "string (6-128 chars, required, hashed)",
-  "role": "enum: 'admin' | 'agent' | 'user' (default: 'user')",
-  "phone": "string (optional, valid phone format)",
-  "isActive": "boolean (default: true)",
-  "lastLogin": "Date (optional)",
-  "permissions": "string[] (optional)",
+  "firstName": "string (2-50 chars)",
+  "lastName": "string (2-50 chars)",
+  "email": "string (unique, valid email)",
+  "password": "string (hashed)",
+  "role": "admin|agent|user",
+  "phone": "string (optional)",
+  "isActive": "boolean",
   "createdAt": "Date",
   "updatedAt": "Date"
 }
 ```
 
-### Apartment Model
+### Apartment
 ```json
 {
   "_id": "ObjectId",
-  "unitName": "string (max 100 chars, required)",
-  "unitNumber": "string (max 20 chars, required)",
-  "project": "string (max 200 chars, required)",
-  "address": "string (max 500 chars, required)",
-  "city": "string (max 100 chars, required)",
-  "price": "number (0-999999999, required)",
-  "listingType": "enum: 'rent' | 'sale' (default: 'rent')",
-  "bedrooms": "number (0-20, required)",
-  "bathrooms": "number (0-20, required)",
-  "squareFeet": "number (0-100000, required)",
-  "description": "string (max 2000 chars, required)",
-  "amenities": "ObjectId[] (references Amenity)",
-  "images": "string[] (valid URLs or base64)",
-  "isAvailable": "boolean (default: true)",
-  "agent": "ObjectId (references User, required)",
-  "favorites": "ObjectId[] (references User)",
-  "developer": "ObjectId (references Developer, required)",
-  "compound": "ObjectId (references Compound, required)",
+  "unitName": "string (max 100 chars)",
+  "unitNumber": "string (max 20 chars)",
+  "project": "string (max 200 chars)",
+  "address": "string (max 500 chars)",
+  "city": "string (max 100 chars)",
+  "price": "number (0-999999999)",
+  "listingType": "rent|sale",
+  "bedrooms": "number (0-20)",
+  "bathrooms": "number (0-20)",
+  "squareFeet": "number (0-100000)",
+  "description": "string (max 2000 chars)",
+  "images": "string[] (URLs or base64)",
+  "amenities": "ObjectId[] (references)",
+  "developer": "ObjectId (reference)",
+  "compound": "ObjectId (reference)",
+  "agent": "ObjectId (reference)",
+  "isAvailable": "boolean",
+  "favorites": "ObjectId[] (user references)",
   "createdAt": "Date",
   "updatedAt": "Date"
 }
 ```
 
-### Developer Model
-```json
-{
-  "_id": "ObjectId",
-  "name": "string (unique, required)",
-  "description": "string (optional)",
-  "website": "string (optional)",
-  "createdAt": "Date",
-  "updatedAt": "Date"
-}
+## Security Features
+
+- **JWT Authentication**: Secure token-based authentication
+- **Role-based Access Control**: Admin, agent, and user permissions
+- **Input Validation**: Comprehensive request validation
+- **Security Headers**: XSS protection, content type options
+- **Rate Limiting**: API endpoint protection
+- **Password Hashing**: Bcrypt encryption for user passwords
+
+## Error Handling
+
+The API provides detailed error responses with appropriate HTTP status codes:
+- **400**: Bad request (validation errors)
+- **401**: Unauthorized (missing/invalid token)
+- **403**: Forbidden (insufficient permissions)
+- **404**: Not found
+- **409**: Conflict (duplicate resources)
+- **422**: Unprocessable entity (validation details)
+- **500**: Internal server error
+
+## Docker Deployment
+
+### Production Setup
+```bash
+# Build and start all services
+docker-compose up --build -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
 ```
 
-### Compound Model
-```json
-{
-  "_id": "ObjectId",
-  "name": "string (unique, required)",
-  "location": "string (optional)",
-  "description": "string (optional)",
-  "createdAt": "Date",
-  "updatedAt": "Date"
-}
+### Environment Variables for Production
+```bash
+NODE_ENV=production
+PORT=3001
+MONGODB_URI=mongodb+srv://zeyad:zeyadwael@nawy.xrmjrzc.mongodb.net/?retryWrites=true&w=majority&appName=Nawy
+JWT_SECRET=your_production_jwt_secret
+NEXT_PUBLIC_API_URL=https://your-domain.com
 ```
 
-### Amenity Model
-```json
-{
-  "_id": "ObjectId",
-  "name": "string (unique, required)",
-  "description": "string (optional)",
-  "createdAt": "Date",
-  "updatedAt": "Date"
-}
+## Testing the Application
+
+### Sample User Accounts
+The application comes with pre-configured test accounts:
+
+- **Admin User**: admin@apartmentapp.com / admin123
+  - Full system access
+  - User management capabilities
+  - All listing management features
+
+- **Agent User**: ahmed@apartmentapp.com / agent123
+  - Create and manage apartment listings
+  - Upload property images
+  - Toggle listing availability
+
+- **Regular User**: omar@apartmentapp.com / user123
+  - Browse apartment listings
+  - Save favorite properties
+  - Search and filter functionality
+
+### Database Seeding
+To populate the database with sample data:
+```bash
+cd backend
+npm run seed
 ```
 
----
+This will create sample developers, compounds, amenities, and apartment listings for testing.
 
-## Authentication Endpoints
+## Performance Considerations
 
-### `POST /api/auth/register`
-Register a new user account.
-- **Access**: Public
-- **Body**:
-  ```json
-  {
-    "firstName": "John",
-    "lastName": "Doe", 
-    "email": "john@example.com",
-    "password": "password123",
-    "phone": "+201234567890",
-    "role": "user"
-  }
-  ```
-- **Validation**:
-  - `firstName`: 2-50 characters, required
-  - `lastName`: 2-50 characters, required
-  - `email`: Valid email format, unique, required
-  - `password`: 6-128 characters, required
-  - `phone`: Optional, valid phone format
-  - `role`: Optional, must be 'admin', 'agent', or 'user'
-- **Response**: User object with JWT token
-- **Error Codes**: 400 (validation), 409 (email exists), 500 (server error)
+- **Database Indexing**: Optimized queries with proper indexes
+- **Image Optimization**: Compressed image uploads
+- **Caching**: React Query for frontend data caching
+- **Pagination**: Efficient data loading for large datasets
+- **Lazy Loading**: Component and image lazy loading
 
-### `POST /api/auth/login`
-Authenticate user and get JWT token.
-- **Access**: Public
-- **Body**:
-  ```json
-  {
-    "email": "john@example.com",
-    "password": "password123"
-  }
-  ```
-- **Validation**:
-  - `email`: Valid email format, required
-  - `password`: Required
-- **Response**: User object with JWT token
-- **Error Codes**: 400 (invalid credentials), 401 (unauthorized), 500 (server error)
+## Contributing
 
-### `GET /api/auth/me`
-Get current authenticated user's profile.
-- **Access**: Authenticated users
-- **Headers**: `Authorization: Bearer <token>`
-- **Response**: User object
-- **Error Codes**: 401 (no token), 500 (server error)
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-### `GET /api/auth/users`
-Get all users (Admin only).
-- **Access**: Admin only
-- **Headers**: `Authorization: Bearer <token>`
-- **Response**: Array of user objects
-- **Error Codes**: 401 (no token), 403 (not admin), 500 (server error)
+## Troubleshooting
 
-### `PUT /api/auth/users/:id/role`
-Update user role (Admin only).
-- **Access**: Admin only
-- **Headers**: `Authorization: Bearer <token>`
-- **Body**:
-  ```json
-  {
-    "role": "agent"
-  }
-  ```
-- **Validation**:
-  - `role`: Must be 'admin', 'agent', or 'user'
-- **Response**: Updated user object
-- **Error Codes**: 400 (invalid role), 401 (no token), 403 (not admin), 404 (user not found), 500 (server error)
+### Common Issues
 
-### `PUT /api/auth/users/:id/toggle-status`
-Toggle user active status (Admin only).
-- **Access**: Admin only
-- **Headers**: `Authorization: Bearer <token>`
-- **Response**: Updated user object
-- **Error Codes**: 401 (no token), 403 (not admin), 404 (user not found), 500 (server error)
+**Backend won't start:**
+- Check MongoDB connection string
+- Verify all environment variables are set
+- Check if port 3001 is available
 
----
+**Frontend can't connect to API:**
+- Ensure backend is running on port 3001
+- Check `NEXT_PUBLIC_API_URL` environment variable
+- Verify CORS configuration
 
-## Apartment Endpoints
+**Database connection issues:**
+- Check MongoDB Atlas network access
+- Verify connection string format
+- Ensure database user has proper permissions
 
-### `GET /api/apartments`
-Get all available apartments with search/filter.
-- **Access**: Public
-- **Query Parameters**:
-  - `search`: Search in name, unit, project (string)
-  - `city`: Filter by city (string)
-  - `minPrice`: Minimum price (number, min: 0)
-  - `maxPrice`: Maximum price (number, min: 0)
-  - `bedrooms`: Number of bedrooms (number, 0-10)
-  - `bathrooms`: Number of bathrooms (number, 0-10)
-  - `listingType`: "rent" or "sale" (string)
-  - `state`: Filter by state (string)
-  - `compoundName`: Filter by compound name (string)
-  - `developerName`: Filter by developer name (string)
-  - `isAvailable`: Filter by availability (boolean)
-  - `minSquareFeet`: Minimum square feet (number, min: 0)
-  - `maxSquareFeet`: Maximum square feet (number, min: 0)
-  - `page`: Page number (default: 1)
-  - `limit`: Items per page (default: 10)
-- **Response**: Array of apartment objects with pagination
-- **Error Codes**: 400 (validation), 500 (server error)
-
-### `GET /api/apartments/admin`
-Get all apartments including unavailable ones (Admin only).
-- **Access**: Admin only
-- **Headers**: `Authorization: Bearer <token>`
-- **Query Parameters**: Same as above
-- **Response**: Array of apartment objects
-- **Error Codes**: 401 (no token), 403 (not admin), 500 (server error)
-
-### `GET /api/apartments/my-listings`
-Get current user's apartment listings.
-- **Access**: Authenticated users
-- **Headers**: `Authorization: Bearer <token>`
-- **Response**: Array of apartment objects
-- **Error Codes**: 401 (no token), 500 (server error)
-
-### `GET /api/apartments/favorites`
-Get user's favorite apartments.
-- **Access**: Authenticated users
-- **Headers**: `Authorization: Bearer <token>`
-- **Response**: Array of apartment objects
-- **Error Codes**: 401 (no token), 500 (server error)
-
-### `GET /api/apartments/:id`
-Get single apartment by ID.
-- **Access**: Public
-- **Response**: Apartment object with populated references
-- **Error Codes**: 404 (not found), 500 (server error)
-
-### `POST /api/apartments`
-Create new apartment listing.
-- **Access**: Agents and Admins
-- **Headers**: `Authorization: Bearer <token>`
-- **Body**:
-  ```json
-  {
-    "unitName": "Luxury Apartment",
-    "unitNumber": "A101",
-    "project": "Sunset Towers",
-    "address": "123 Main St",
-    "city": "Cairo",
-    "price": 5000,
-    "listingType": "rent",
-    "bedrooms": 2,
-    "bathrooms": 2,
-    "squareFeet": 1200,
-    "description": "Beautiful apartment with modern amenities...",
-    "images": ["https://example.com/image1.jpg", "data:image/jpeg;base64,..."],
-    "developer": "507f1f77bcf86cd799439011",
-    "compound": "507f1f77bcf86cd799439012",
-    "amenities": ["507f1f77bcf86cd799439013", "507f1f77bcf86cd799439014"]
-  }
-  ```
-- **Validation**:
-  - `unitName`: Required, max 100 characters
-  - `unitNumber`: Required, max 20 characters
-  - `project`: Required, max 200 characters
-  - `address`: Required, max 500 characters
-  - `city`: Required, max 100 characters
-  - `price`: Required, 0-999999999
-  - `listingType`: Required, 'rent' or 'sale'
-  - `bedrooms`: Required, 0-20
-  - `bathrooms`: Required, 0-20
-  - `squareFeet`: Required, 0-100000
-  - `description`: Required, max 2000 characters
-  - `images`: Array of valid URLs or base64 data URLs
-  - `developer`: Required, valid ObjectId
-  - `compound`: Required, valid ObjectId
-  - `amenities`: Array of valid ObjectIds
-- **Response**: Created apartment object
-- **Error Codes**: 400 (validation), 401 (no token), 403 (not agent/admin), 500 (server error)
-
-### `PUT /api/apartments/:id`
-Update apartment listing.
-- **Access**: Agents and Admins
-- **Headers**: `Authorization: Bearer <token>`
-- **Body**: Same as POST
-- **Response**: Updated apartment object
-- **Error Codes**: 400 (validation), 401 (no token), 403 (not agent/admin), 404 (not found), 500 (server error)
-
-### `DELETE /api/apartments/:id`
-Delete apartment listing.
-- **Access**: Agents and Admins
-- **Headers**: `Authorization: Bearer <token>`
-- **Response**: Success message
-- **Error Codes**: 401 (no token), 403 (not agent/admin), 404 (not found), 500 (server error)
-
-### `PUT /api/apartments/:id/toggle-availability`
-Toggle apartment availability (show/hide).
-- **Access**: Agents and Admins
-- **Headers**: `Authorization: Bearer <token>`
-- **Response**: Updated apartment object
-- **Error Codes**: 401 (no token), 403 (not agent/admin), 404 (not found), 500 (server error)
-
-### `POST /api/apartments/:id/favorite`
-Add apartment to favorites.
-- **Access**: Authenticated users
-- **Headers**: `Authorization: Bearer <token>`
-- **Response**: Success message
-- **Error Codes**: 401 (no token), 404 (not found), 500 (server error)
-
-### `DELETE /api/apartments/:id/favorite`
-Remove apartment from favorites.
-- **Access**: Authenticated users
-- **Headers**: `Authorization: Bearer <token>`
-- **Response**: Success message
-- **Error Codes**: 401 (no token), 404 (not found), 500 (server error)
-
----
-
-## Developer Endpoints
-
-### `GET /api/developers`
-Get all developers.
-- **Access**: Public
-- **Response**: Array of developer objects
-- **Error Codes**: 500 (server error)
-
-### `GET /api/developers/:id`
-Get developer by ID.
-- **Access**: Public
-- **Response**: Developer object
-- **Error Codes**: 404 (not found), 500 (server error)
-
-### `POST /api/developers`
-Create new developer.
-- **Access**: Public
-- **Body**:
-  ```json
-  {
-    "name": "Developer Name",
-    "description": "Developer description",
-    "website": "https://developer.com"
-  }
-  ```
-- **Validation**:
-  - `name`: Required, unique, trimmed
-  - `description`: Optional, trimmed
-  - `website`: Optional, trimmed
-- **Response**: Created developer object
-- **Error Codes**: 400 (validation, name exists), 500 (server error)
-
-### `PUT /api/developers/:id`
-Update developer.
-- **Access**: Public
-- **Body**: Same as POST
-- **Response**: Updated developer object
-- **Error Codes**: 400 (validation), 404 (not found), 500 (server error)
-
-### `DELETE /api/developers/:id`
-Delete developer.
-- **Access**: Public
-- **Response**: Success message
-- **Error Codes**: 404 (not found), 500 (server error)
-
----
-
-## Compound Endpoints
-
-### `GET /api/compounds`
-Get all compounds.
-- **Access**: Public
-- **Response**: Array of compound objects
-- **Error Codes**: 500 (server error)
-
-### `GET /api/compounds/:id`
-Get compound by ID.
-- **Access**: Public
-- **Response**: Compound object
-- **Error Codes**: 404 (not found), 500 (server error)
-
-### `POST /api/compounds`
-Create new compound.
-- **Access**: Public
-- **Body**:
-  ```json
-  {
-    "name": "Compound Name",
-    "description": "Compound description",
-    "location": "Compound location"
-  }
-  ```
-- **Validation**:
-  - `name`: Required, unique, trimmed
-  - `description`: Optional, trimmed
-  - `location`: Optional, trimmed
-- **Response**: Created compound object
-- **Error Codes**: 400 (validation, name exists), 500 (server error)
-
-### `PUT /api/compounds/:id`
-Update compound.
-- **Access**: Public
-- **Body**: Same as POST
-- **Response**: Updated compound object
-- **Error Codes**: 400 (validation), 404 (not found), 500 (server error)
-
-### `DELETE /api/compounds/:id`
-Delete compound.
-- **Access**: Public
-- **Response**: Success message
-- **Error Codes**: 404 (not found), 500 (server error)
-
----
-
-## Amenity Endpoints
-
-### `GET /api/amenities`
-Get all amenities.
-- **Access**: Public
-- **Response**: Array of amenity objects (sorted by name)
-- **Error Codes**: 500 (server error)
-
-### `POST /api/amenities`
-Create new amenity.
-- **Access**: Public
-- **Body**:
-  ```json
-  {
-    "name": "Swimming Pool",
-    "description": "Outdoor swimming pool"
-  }
-  ```
-- **Validation**:
-  - `name`: Required, unique, trimmed
-  - `description`: Optional, trimmed
-- **Response**: Created amenity object
-- **Error Codes**: 400 (validation, name exists), 500 (server error)
-
-### `PUT /api/amenities/:id`
-Update amenity.
-- **Access**: Public
-- **Body**: Same as POST
-- **Response**: Updated amenity object
-- **Error Codes**: 400 (validation), 404 (not found), 500 (server error)
-
-### `DELETE /api/amenities/:id`
-Delete amenity.
-- **Access**: Public
-- **Response**: Success message
-- **Error Codes**: 404 (not found), 500 (server error)
-
----
-
-## Health Check
-
-### `GET /health`
-Check server status.
-- **Access**: Public
-- **Response**:
-  ```json
-  {
-    "message": "Server is running"
-  }
-  ```
-
----
-
-## Error Responses
-
-### 400 Bad Request
-```json
-{
-  "success": false,
-  "message": "Validation error message"
-}
-```
-
-### 401 Unauthorized
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-### 403 Forbidden
-```json
-{
-  "success": false,
-  "message": "Access denied"
-}
-```
-
-### 404 Not Found
-```json
-{
-  "success": false,
-  "message": "Resource not found"
-}
-```
-
-### 409 Conflict
-```json
-{
-  "success": false,
-  "message": "Resource already exists"
-}
-```
-
-### 422 Unprocessable Entity
-```json
-{
-  "success": false,
-  "message": "Invalid data provided",
-  "errors": [
-    {
-      "property": "fieldName",
-      "constraints": {
-        "isNotEmpty": "Field cannot be empty"
-      }
-    }
-  ]
-}
-```
-
-### 500 Internal Server Error
-```json
-{
-  "success": false,
-  "message": "Internal server error"
-}
-```
-
----
-
-## Rate Limiting
-
-The API implements rate limiting through Nginx:
-- **API endpoints**: 20 requests per second with burst allowance
-- **Health check**: No rate limiting
-- **Frontend routes**: No rate limiting
-
----
-
-## Security Headers
-
-The API includes the following security headers via Helmet:
-- `X-Frame-Options`: SAMEORIGIN
-- `X-XSS-Protection`: 1; mode=block
-- `X-Content-Type-Options`: nosniff
-- `Referrer-Policy`: no-referrer-when-downgrade
-- `Content-Security-Policy`: default-src 'self' http: https: data: blob: 'unsafe-inline'
-
-## Sample Users
-
-- **Admin**: admin@apartmentapp.com / admin123
-- **Agent**: ahmed@apartmentapp.com / agent123
-- **User**: omar@apartmentapp.com / user123
+**Docker issues:**
+- Check if Docker is running
+- Verify docker-compose.yml configuration
+- Check container logs for errors
 
 ## License
 
-MIT 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For support and questions:
+- Check the troubleshooting section above
+- Review the API documentation
+- Examine the error logs for specific issues
+- Ensure all dependencies are properly installed
+
+---
+
+**Built with ❤️ for the real estate community** 
