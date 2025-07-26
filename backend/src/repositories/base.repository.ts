@@ -1,4 +1,11 @@
-import { Document, Model, FilterQuery, UpdateQuery, QueryOptions } from 'mongoose';
+import { Document, Model, FilterQuery, UpdateQuery, PopulateOptions } from 'mongoose';
+
+export interface QueryOptions {
+  sort?: any;
+  limit?: number;
+  skip?: number;
+  populate?: string | PopulateOptions | (string | PopulateOptions)[];
+}
 
 export interface IBaseRepository<T extends Document> {
   findById(id: string): Promise<T | null>;
@@ -49,7 +56,11 @@ export abstract class BaseRepository<T extends Document> implements IBaseReposit
       }
       
       if (options?.populate) {
-        query = query.populate(options.populate);
+        if (typeof options.populate === 'string') {
+          query = query.populate(options.populate as string);
+        } else {
+          query = query.populate(options.populate as PopulateOptions | (string | PopulateOptions)[]);
+        }
       }
       
       return await query.exec();

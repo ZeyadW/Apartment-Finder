@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { apartmentAPI } from "@/services/api";
 import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
@@ -27,7 +27,7 @@ interface Amenity {
   description?: string;
 }
 
-const CreateApartment = () => {
+const CreateApartmentContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
@@ -1054,6 +1054,14 @@ const CreateApartment = () => {
         </form>
       </div>
     </ProtectedRoute>
+  );
+};
+
+const CreateApartment = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CreateApartmentContent />
+    </Suspense>
   );
 };
 
